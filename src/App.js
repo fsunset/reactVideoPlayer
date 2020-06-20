@@ -1,11 +1,14 @@
 import React from 'react';
 import './sass/main.scss';
+import { Container } from 'react-bootstrap';
 
 function App() {
   return (
-    <h1>
-      Videos Landing
-    </h1>
+    <Container>
+      <h1>
+        Videos Landing
+      </h1>
+    </Container>
   );
 }
 
