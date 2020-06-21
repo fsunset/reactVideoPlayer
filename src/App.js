@@ -11,6 +11,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalDescription, setModalDescription] = useState("");
+  const [modalvidSRC, setModalVidSRC] = useState("");
 
   // Videos' Data
   const infoArray = [
@@ -54,11 +55,10 @@ function App() {
     )
   }
 
-  const handleClickVid = (key, leyend) => {
+  const handleClickVid = (key, leyend, vidURL) => {
+    setModalVidSRC(vidURL);
     setModalTitle(key);
     setModalDescription(leyend);
-    console.log("modalTitle----");
-    console.log(modalTitle);
     setShowModal(true);
   }
 
@@ -71,7 +71,7 @@ function App() {
             xs={12}
             md={4}
             className="vid-container my-3"
-            onClick={() => handleClickVid(vid.key, vid.leyend)}
+            onClick={() => handleClickVid(vid.key, vid.leyend, vid.vidURL)}
           >
             <HoverVideoPlayer
               videoSrc={vid.vidURL}
@@ -95,6 +95,7 @@ function App() {
         handleClose={() => setShowModal(false)}
         modalTitle={modalTitle}
         modalDescription={modalDescription}
+        modalvidSRC={modalvidSRC}
       />
 
       <Row>

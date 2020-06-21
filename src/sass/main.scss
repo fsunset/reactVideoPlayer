@@ -1,6 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+// Colour vars
+$white:  #fff;
+$black:  #000;
+
 .main-container {
   font-family: 'Roboto', sans-serif !important;
 
@@ -14,7 +18,7 @@
     }
 
     .loader-container {
-      color: #fff !important;
+      color: $white !important;
       font-size: 1.3em;
 
       > span {
@@ -25,5 +29,30 @@
     div {
       overflow: hidden !important;
     }
+  }
+}
+
+/*
+* Custom Modal Styles
+*/
+
+.fade.modal.show {
+  background: rgba($black,0.7) !important;
+}
+
+.modal-content {
+  background: $black;
+  color: $white;
+
+  .modal-header {
+    border-bottom: none !important;
+  }
+
+  .modal-title {
+    text-transform: capitalize !important;
+  }
+
+  .modal-footer {
+    border-top: none !important;
   }
 }

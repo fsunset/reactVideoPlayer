@@ -1,15 +1,25 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const ModalComponent = ({showModal, handleClose, title, description}) => {
+
+const ModalComponent = ({showModal, handleClose, modalTitle, modalDescription, modalvidSRC}) => {
 	return (
-		<Modal show={showModal} onHide={handleClose}>
-			<Modal.Header closeButton>
-				<Modal.Title>{title}</Modal.Title>
+		<Modal show={showModal} onHide={handleClose} size="lg">
+			<Modal.Header>
+				<Modal.Title>{modalTitle}</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>{description}</Modal.Body>
+			<Modal.Body>
+				<p>
+					{modalDescription}
+				</p>
+
+				<video width="100%" controls>
+					<source src={modalvidSRC} type="video/mp4" />
+					Your browser does not support HTML video.
+				</video>
+			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="secondary" onClick={handleClose}>
+				<Button variant="light" onClick={handleClose}>
 					Close
 				</Button>
 			</Modal.Footer>
