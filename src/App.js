@@ -23,7 +23,7 @@ function App() {
     },
     {
       "key": "iceland",
-      "leyend": "Snow paradaise in Iceland",
+      "leyend": "Snow paradise in Iceland",
       "vidURL": "https://github.com/fsunset/reactVideoPlayer/blob/master/src/videos/iceland.mp4?raw=true",
       "imgURL": "https://raw.githubusercontent.com/fsunset/reactVideoPlayer/master/src/images/iceland.jpg",
     },
