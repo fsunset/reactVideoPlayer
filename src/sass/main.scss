@@ -1,1 +1,29 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.main-container {
+  font-family: 'Roboto', sans-serif !important;
+
+  .vid-container {
+    cursor: pointer;
+
+    img {
+      cursor: pointer;
+      height: 100%;
+      min-width: 100%;
+    }
+
+    .loader-container {
+      color: #fff !important;
+      font-size: 1.3em;
+
+      > span {
+        margin-top: 25% !important;
+      }
+    }
+
+    div {
+      overflow: hidden !important;
+    }
+  }
+}
