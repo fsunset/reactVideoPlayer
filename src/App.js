@@ -1,32 +1,102 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import HoverVideoPlayer from 'react-hover-video-player';
-
-import icelandImg from './images/iceland.jpg';
-import vietnamImg from './images/vietnam.jpg';
-import parisImg from './images/paris.jpg';
-import driveImg from './images/drive.jpg';
-import rioImg from './images/rio.jpg';
-import icelandVid from './videos/iceland.mp4';
-import vietnamVid from './videos/vietnam.mp4';
-import parisVid from './videos/paris.mp4';
-import driveVid from './videos/drive.mp4';
-import rioVid from './videos/rio.mp4';
+import ModalComponent from './components/ModalComponent';
 
 import './sass/main.scss';
 
 
 function App() {
+  // Hooks
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalDescription, setModalDescription] = useState("");
+
+  // Videos' Data
+  const infoArray = [
+    {
+      "key": "drive",
+      "leyend": "Some nice road trip trought desert at night",
+      "vidURL": "https://github.com/fsunset/reactVideoPlayer/blob/master/src/videos/drive.mp4?raw=true",
+      "imgURL": "https://raw.githubusercontent.com/fsunset/reactVideoPlayer/master/src/images/drive.jpg",
+    },
+    {
+      "key": "iceland",
+      "leyend": "Snow paradaise in Iceland",
+      "vidURL": "https://github.com/fsunset/reactVideoPlayer/blob/master/src/videos/iceland.mp4?raw=true",
+      "imgURL": "https://raw.githubusercontent.com/fsunset/reactVideoPlayer/master/src/images/iceland.jpg",
+    },
+    {
+      "key": "paris",
+      "leyend": "Fireworks at night in Paris",
+      "vidURL": "https://github.com/fsunset/reactVideoPlayer/blob/master/src/videos/paris.mp4?raw=true",
+      "imgURL": "https://raw.githubusercontent.com/fsunset/reactVideoPlayer/master/src/images/paris.jpg",
+    },
+    {
+      "key": "rio",
+      "leyend": "Brazil coulture in Rio de Janeiro",
+      "vidURL": "https://github.com/fsunset/reactVideoPlayer/blob/master/src/videos/rio.mp4?raw=true",
+      "imgURL": "https://raw.githubusercontent.com/fsunset/reactVideoPlayer/master/src/images/rio.jpg",
+    },
+    {
+      "key": "vietnam",
+      "leyend": "Most beautiful scenes in South East Asia",
+      "vidURL": "https://github.com/fsunset/reactVideoPlayer/blob/master/src/videos/vietnam.mp4?raw=true",
+      "imgURL": "https://raw.githubusercontent.com/fsunset/reactVideoPlayer/master/src/images/vietnam.jpg",
+    },
+  ];
+
   const LoaderComponent = () => {
     return (
       <Col xs={12} className="loader-container text-center">
-        <span class="d-block">Cargando...</span>
+        <span className="d-block">Cargando...</span>
       </Col>
+    )
+  }
+
+  const handleClickVid = (key, leyend) => {
+    setModalTitle(key);
+    setModalDescription(leyend);
+    console.log("modalTitle----");
+    console.log(modalTitle);
+    setShowModal(true);
+  }
+
+  const CustomVidComponent = () => {
+    return (
+      infoArray.map((vid, i) => {
+        return (
+          <Col
+            key={i}
+            xs={12}
+            md={4}
+            className="vid-container my-3"
+            onClick={() => handleClickVid(vid.key, vid.leyend)}
+          >
+            <HoverVideoPlayer
+              videoSrc={vid.vidURL}
+              pausedOverlay={
+                <img src={vid.imgURL} alt={vid.key} />
+              }
+              loadingOverlay={
+                <LoaderComponent />
+              }
+            />
+          </Col>
+        )
+      })
     )
   }
 
   return (
     <Container className="main-container">
+      <ModalComponent
+        showModal={showModal}
+        handleClose={() => setShowModal(false)}
+        modalTitle={modalTitle}
+        modalDescription={modalDescription}
+      />
+
       <Row>
         <Col xs={12} className="my-5 text-center">
           <h1>
@@ -36,65 +106,7 @@ function App() {
       </Row>
 
       <Row>
-        <Col xs={12} md={4} className="vid-container my-3">
-          <HoverVideoPlayer
-            videoSrc={icelandVid}
-            pausedOverlay={
-              <img src={icelandImg} alt="Iceland" />
-            }
-            loadingOverlay={
-              <LoaderComponent />
-            }
-          />
-        </Col>
-
-        <Col xs={12} md={4} className="vid-container my-3">
-          <HoverVideoPlayer
-            videoSrc={parisVid}
-            pausedOverlay={
-              <img src={parisImg} alt="Paris" />
-            }
-            loadingOverlay={
-              <LoaderComponent />
-            }
-          />
-        </Col>
-
-        <Col xs={12} md={4} className="vid-container my-3">
-          <HoverVideoPlayer
-            videoSrc={vietnamVid}
-            pausedOverlay={
-              <img src={vietnamImg} alt="Vietnam" />
-            }
-            loadingOverlay={
-              <LoaderComponent />
-            }
-          />
-        </Col>
-
-        <Col xs={12} md={4} className="vid-container my-3">
-          <HoverVideoPlayer
-            videoSrc={driveVid}
-            pausedOverlay={
-              <img src={driveImg} alt="Drive" />
-            }
-            loadingOverlay={
-              <LoaderComponent />
-            }
-          />
-        </Col>
-        
-        <Col xs={12} md={4} className="vid-container my-3">
-          <HoverVideoPlayer
-            videoSrc={rioVid}
-            pausedOverlay={
-              <img src={rioImg} alt="Rio" />
-            }
-            loadingOverlay={
-              <LoaderComponent />
-            }
-          />
-        </Col>
+        <CustomVidComponent />
       </Row>
 
       <footer className="text-center">
